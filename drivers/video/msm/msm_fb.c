@@ -1781,6 +1781,8 @@ static int msm_fb_open(struct fb_info *info, int user)
 
 	if (result < 0) {
 		printk(KERN_ERR "pm_runtime: fail to wake up\n");
+        pm_runtime_put_sync(info->dev);
+        return result;
 	}
 
 	if (info->node == 0 && !(mfd->cont_splash_done)) {	/* primary */
